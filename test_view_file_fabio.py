@@ -1,11 +1,6 @@
-import os
+from toolbox import os
 
 print('')
 
-
-
-
-with open('c:/Users/Formation/Documents/GitHub/LIC/', "r") as dossier:
-    for fichiers in dossier:
-        print(fichiers)        
-        
+for filename in os.listdir("C:\\Users\\Formation\\Documents\\GitHub\\LIC"):
+   print(filename)
