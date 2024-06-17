@@ -3,7 +3,7 @@
 import sys
 
 from PySide6.QtCore import Slot
-from PySide6.QtGui import QAction
+from PySide6.QtGui import QAction, QIcon
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTreeView, QVBoxLayout, QFileSystemModel
 
 
@@ -40,37 +40,57 @@ class MyWindow(QMainWindow):
         statusBar.showMessage(self.windowTitle())   # Définition du message initial
         
 
-    def createActions(self):
-        self.actNew = QAction("&Nouveau", self)
-        self.actNew.setShortcut("Ctrl+N")
-        self.actNew.setStatusTip("Nouveau document")
-        self.actNew.triggered.connect(self.newDocument)
 
-        self.actOpen = QAction("&Ouvrir...", self)
+    def createActions(self):
+
+        self.actNewFile = QAction(QIcon("icons/new.png"), "Fichier", self)
+        self.actNewFile.setStatusTip("Créer un nouveau fichier")
+        self.actNewFile.triggered.connect(self.newFile)
+
+        self.actNewFolder = QAction(QIcon("icons/folder.png"), "Dossier", self)
+        self.actNewFolder.setStatusTip("Créer un nouveau dossier")
+        self.actNewFolder.triggered.connect(self.newFolder)
+
+        self.actOpen = QAction(QIcon("icons/open.png"), "&Ouvrir...", self)
         self.actOpen.setShortcut("Ctrl+O")
         self.actOpen.setStatusTip("Ouvrir fichier")
 
-        self.actSave = QAction("&Sauvegarder", self)
+        self.actSave = QAction(QIcon("icons/save.png"), "&Sauvegarder", self)
         self.actSave.setShortcut("Ctrl+S")
         self.actSave.setStatusTip("Sauvegarder fichier")
 
-        self.actExit = QAction("Quitter", self)
+        self.actExit = QAction(QIcon("icons/exit.png"), "Quitter", self)
         self.actExit.setShortcut("Alt+F4")
         self.actExit.setStatusTip("Quitter")
         # La méthode close est directement fournie par la classe QMainWindow.
-        self.actExit.triggered.connect(self.close)
         
-    
+        self.actExit.triggered.connect(self.close)
+
+
     def createMenuBar(self):
         menuBar = self.menuBar()
 
-        file = menuBar.addMenu("&File")
-        file.addAction(self.actNew)
-        file.addSeparator()
+        actFile1 = QAction(QIcon("icons/new.png"), "Fichier", self)
+        actFile1.setStatusTip(actFile1.text())
+        actFile2 = QAction(QIcon("icons/folder.png"), "Dossier", self)
+        actFile2.setStatusTip(actFile2.text())
+        
+        file = menuBar.addMenu("&Fichier")
+        # Créer un sous-menu pour l'action Nouveau
+        newMenu = file.addMenu(QIcon("icons/new.png"), "Nouveau")
+        newMenu.addAction(self.actNewFile)
+        newMenu.addAction(self.actNewFolder)
+        
         file.addAction(self.actOpen)
         file.addAction(self.actSave)
         file.addSeparator()
         file.addAction(self.actExit)
+                
+
+
+                
+
+        
         
         
     @Slot()      # Pensez à importer le décorateur : from PySide6.QtCore import Slot
@@ -81,6 +101,14 @@ class MyWindow(QMainWindow):
     @Slot()
     def newDocument(self):
         print("New document is requested")
+        
+    @Slot()
+    def newFile(self):
+        print("New file is requested")
+
+    @Slot()
+    def newFolder(self):
+        print("New folder is requested")
 
 
 
