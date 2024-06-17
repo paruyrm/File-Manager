@@ -29,21 +29,48 @@ class MyWindow(QMainWindow):
         # On injecte ce widget en tant que zone centrale.
         self.setCentralWidget(centralArea)
         
-        button = QPushButton("This is a button", centralArea)
+        button = QPushButton("Boutton", centralArea)
         button.setGeometry(320, 50, 270, 30)
         button.clicked.connect(self.buttonClicked)
+        
+        self.createActions()
+        self.createMenuBar()
 
-        actNew = QAction("&New", self)
-        actNew.setShortcut("Ctrl+N")
-        actNew.triggered.connect(self.newDocument)
-        
-        menuBar = self.menuBar()
-        file = menuBar.addMenu("&File")
-        file.addAction(actNew)
-        
         statusBar = self.statusBar()
         statusBar.showMessage(self.windowTitle())   # Définition du message initial
+        
 
+    def createActions(self):
+        self.actNew = QAction("&Nouveau", self)
+        self.actNew.setShortcut("Ctrl+N")
+        self.actNew.setStatusTip("Nouveau document")
+        self.actNew.triggered.connect(self.newDocument)
+
+        self.actOpen = QAction("&Ouvrir...", self)
+        self.actOpen.setShortcut("Ctrl+O")
+        self.actOpen.setStatusTip("Ouvrir fichier")
+
+        self.actSave = QAction("&Sauvegarder", self)
+        self.actSave.setShortcut("Ctrl+S")
+        self.actSave.setStatusTip("Sauvegarder fichier")
+
+        self.actExit = QAction("Quitter", self)
+        self.actExit.setShortcut("Alt+F4")
+        self.actExit.setStatusTip("Quitter")
+        # La méthode close est directement fournie par la classe QMainWindow.
+        self.actExit.triggered.connect(self.close)
+        
+    
+    def createMenuBar(self):
+        menuBar = self.menuBar()
+
+        file = menuBar.addMenu("&File")
+        file.addAction(self.actNew)
+        file.addSeparator()
+        file.addAction(self.actOpen)
+        file.addAction(self.actSave)
+        file.addSeparator()
+        file.addAction(self.actExit)
         
         
     @Slot()      # Pensez à importer le décorateur : from PySide6.QtCore import Slot
