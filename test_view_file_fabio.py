@@ -2,7 +2,7 @@ from toolbox import os
 
 print('')
 
-for filename in os.listdir("C:\\Users\\paruy\\OneDrive\\Документы\\GitHub\\File-Manager"):
+for filename in os.listdir("C:\\Users\\Formation\\Documents\\GitHub\\File-Manager"):
    print(filename)
    
 
@@ -15,8 +15,8 @@ print('-------------')
 # os.rename('ancien_nom', 'nouveau_nom') → Renommer un fichier ou un dossier :
 # nom_fichier, extension = os.path.splitext('chemin/du/fichier.txt')          →          Obtenir l'extension d'un fichier
 
-for element in os.listdir('C:\\Users\\Formation\\Documents\\GitHub\\LIC'):
-    chemin_complet = os.path.join('C:\\Users\\Formation\\Documents\\GitHub\\LIC', element)
+for element in os.listdir('C:\\Users\\Formation\\Documents\\GitHub\\File-Manager'):
+    chemin_complet = os.path.join('C:\\Users\\Formation\\Documents\\GitHub\\File-Manager', element)
     if os.path.isfile(chemin_complet):
         print(f"Fichier: {element}")
     elif os.path.isdir(chemin_complet):

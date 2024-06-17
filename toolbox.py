@@ -1,6 +1,7 @@
 import tkinter
 import os
-import easygui
+import pathlib 
+# import easygui
 
 
 
