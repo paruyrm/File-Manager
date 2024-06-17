@@ -3,6 +3,7 @@
 import sys
 
 from PySide6.QtCore import QDir, Slot
+from PySide6.QtGui import QIcon, QAction
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTreeView, QVBoxLayout, QFileSystemModel
 
 
@@ -44,12 +45,23 @@ class MyWindow(QMainWindow):
         self.setLayout(layout)
         
         
+        actNew = QAction("&New", self)
+        actNew.setShortcut("Ctrl+N")
+        actNew.triggered.connect(self.newDocument)
+        
+        menuBar = self.menuBar()
+        file = menuBar.addMenu("&File")
+        file.addAction(actNew)
+        
         
     @Slot()      # Pensez à importer le décorateur : from PySide6.QtCore import Slot
     def buttonClicked(self):
         btn = self.sender()
         print(f"Button <{btn.text()}> clicked")
     
+    @Slot()
+    def newDocument(self):
+        print("New document is requested")
 
 
 
