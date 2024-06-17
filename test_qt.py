@@ -1,10 +1,9 @@
 	
 
 import sys
-
 from PySide6.QtCore import Slot
 from PySide6.QtGui import QAction, QIcon
-from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTreeView, QVBoxLayout, QFileSystemModel
+from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QMessageBox
 
 
 class MyWindow(QMainWindow):
@@ -64,6 +63,30 @@ class MyWindow(QMainWindow):
         self.actExit.setStatusTip("Quitter")
         # La méthode close est directement fournie par la classe QMainWindow.
         
+        self.actUndo = QAction(QIcon("icons/undo.png"), "&Undo", self)
+        self.actUndo.setShortcut("Ctrl+Z")
+        self.actUndo.setStatusTip("Undo")
+
+        self.actRedo = QAction(QIcon("icons/redo.png"), "&Redo", self)
+        self.actRedo.setShortcut("Ctrl+Y")
+        self.actRedo.setStatusTip("Redo")
+
+        self.actCopy = QAction(QIcon("icons/copy.png"), "&Copy", self)
+        self.actCopy.setShortcut("Ctrl+C")
+        self.actCopy.setStatusTip("Copy")
+
+        self.actCut = QAction(QIcon("icons/cut.png"), "Cu&t", self)
+        self.actCut.setShortcut("Ctrl+X")
+        self.actCut.setStatusTip("Cut")
+
+        self.actPaste = QAction(QIcon("icons/paste.png"), "&Paste", self)
+        self.actPaste.setShortcut("Ctrl+V")
+        self.actPaste.setStatusTip("Paste")
+
+        self.actAbout = QAction(QIcon("icons/about.png"), "About...", self)
+        self.actAbout.setStatusTip("About...")
+        self.actAbout.triggered.connect(self.about)
+        
         self.actExit.triggered.connect(self.close)
 
 
@@ -86,9 +109,16 @@ class MyWindow(QMainWindow):
         file.addSeparator()
         file.addAction(self.actExit)
                 
+        edit = menuBar.addMenu("&Edit")
+        edit.addAction(self.actUndo)
+        edit.addAction(self.actRedo)
+        edit.addSeparator()
+        edit.addAction(self.actCopy)
+        edit.addAction(self.actCut)
+        edit.addAction(self.actPaste)
 
-
-                
+        helpMenu = menuBar.addMenu("&Help")
+        helpMenu.addAction(self.actAbout)
 
         
         
@@ -110,7 +140,11 @@ class MyWindow(QMainWindow):
     def newFolder(self):
         print("New folder is requested")
 
-
+    @Slot()
+    def about(self):
+        aboutText = "PyFile Manager\n\nVersion 1.0\n\nA simple file manager application using PySide6."
+        QMessageBox.about(self, "About PyFile Manager", aboutText)
+        
 
 if __name__ == "__main__":
     # On crée l'instance d'application en lui passant le tableau des arguments.
