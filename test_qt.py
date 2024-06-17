@@ -2,8 +2,8 @@
 
 import sys
 
-from PySide6.QtCore import QDir, Slot
-from PySide6.QtGui import QIcon, QAction
+from PySide6.QtCore import Slot
+from PySide6.QtGui import QAction
 from PySide6.QtWidgets import QApplication, QMainWindow, QWidget, QPushButton, QTreeView, QVBoxLayout, QFileSystemModel
 
 
@@ -33,18 +33,6 @@ class MyWindow(QMainWindow):
         button.setGeometry(320, 50, 270, 30)
         button.clicked.connect(self.buttonClicked)
 
-        
-        treeModel = QFileSystemModel()
-        treeModel.setRootPath(QDir.currentPath())
-
-        treeView = QTreeView()
-        treeView.setModel(treeModel)
-
-        layout = QVBoxLayout(self)
-        layout.addWidget(treeView)
-        self.setLayout(layout)
-        
-        
         actNew = QAction("&New", self)
         actNew.setShortcut("Ctrl+N")
         actNew.triggered.connect(self.newDocument)
@@ -52,6 +40,10 @@ class MyWindow(QMainWindow):
         menuBar = self.menuBar()
         file = menuBar.addMenu("&File")
         file.addAction(actNew)
+        
+        statusBar = self.statusBar()
+        statusBar.showMessage(self.windowTitle())   # Définition du message initial
+
         
         
     @Slot()      # Pensez à importer le décorateur : from PySide6.QtCore import Slot

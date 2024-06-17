@@ -1,1 +1,0 @@
-https://wiki.monserveurprive.ovh/
