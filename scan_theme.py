@@ -1,23 +1,14 @@
 import os
 
-# Chemin vers le dossier theme
-theme_folder = "./theme"  # Utilisation de "./theme" pour indiquer le dossier 'theme' dans le même répertoire que le script
+# Liste des fichiers .qss trouvés
+styleSheets = [os.path.join(root, file) 
+               for root, _, files in os.walk("./theme") 
+               for file in files if file.endswith(".qss")]
 
-# Liste pour stocker tous les fichiers .qss trouvés
-all_style_sheets = []
+# Tri des fichiers sans tenir compte de la casse
+styleSheets.sort(key=lambda file: file.lower())
 
-# Parcourir récursivement tous les sous-dossiers du dossier theme
-for root, dirs, files in os.walk(theme_folder):
-    for file in files:
-        if file.endswith(".qss"):
-            # Construire le chemin absolu du fichier .qss trouvé
-            file_path = os.path.join(root, file)
-            all_style_sheets.append(file_path)
-
-# Trier la liste de fichiers .qss trouvés
-all_style_sheets.sort()
-
-# Afficher les fichiers .qss trouvés
-print("Fichiers .qss trouvés :")
-for file_path in all_style_sheets:
-    print(file_path)
+# Affichage des fichiers trouvés
+print(styleSheets)
+# for file_path in styleSheets:
+#     print(file_path)
