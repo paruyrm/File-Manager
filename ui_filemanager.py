@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'FileManagerBIEZBH.ui'
+## Form generated from reading UI file 'FileManagerftVULM.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.7.1
 ##
@@ -16,7 +16,7 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QIcon, QImage, QKeySequence, QLinearGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
-from PySide6.QtWidgets import (QApplication, QHeaderView, QLabel, QListView,
+from PySide6.QtWidgets import (QApplication, QHBoxLayout, QHeaderView, QLabel,
     QMainWindow, QMenu, QMenuBar, QSizePolicy,
     QSplitter, QStatusBar, QToolBar, QTreeView,
     QVBoxLayout, QWidget)
@@ -37,10 +37,12 @@ class Ui_FileManager(object):
         self.actionColler.setObjectName(u"actionColler")
         self.actionSauvegarder = QAction(FileManager)
         self.actionSauvegarder.setObjectName(u"actionSauvegarder")
+        self.actionRenommer = QAction(FileManager)
+        self.actionRenommer.setObjectName(u"actionRenommer")
         self.centralwidget = QWidget(FileManager)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.verticalLayout = QVBoxLayout(self.centralwidget)
-        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.horizontalLayout_2 = QHBoxLayout(self.centralwidget)
+        self.horizontalLayout_2.setObjectName(u"horizontalLayout_2")
         self.splitter = QSplitter(self.centralwidget)
         self.splitter.setObjectName(u"splitter")
         self.splitter.setOrientation(Qt.Orientation.Horizontal)
@@ -57,19 +59,6 @@ class Ui_FileManager(object):
         self.verticalLayout_2.addWidget(self.treeView)
 
         self.splitter.addWidget(self.panel_treeview)
-        self.panel_listview = QWidget(self.splitter)
-        self.panel_listview.setObjectName(u"panel_listview")
-        self.panel_listview.setStyleSheet(u"background-color: rgb(150, 150, 150);")
-        self.verticalLayout_3 = QVBoxLayout(self.panel_listview)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.listView = QListView(self.panel_listview)
-        self.listView.setObjectName(u"listView")
-        self.listView.setStyleSheet(u"background-color: rgb(255, 255, 255);\n"
-"color: black;")
-
-        self.verticalLayout_3.addWidget(self.listView)
-
-        self.splitter.addWidget(self.panel_listview)
         self.panel_preview = QWidget(self.splitter)
         self.panel_preview.setObjectName(u"panel_preview")
         self.panel_preview.setStyleSheet(u"background-color: rgb(255, 255, 255);")
@@ -119,7 +108,7 @@ class Ui_FileManager(object):
 
         self.splitter.addWidget(self.panel_preview)
 
-        self.verticalLayout.addWidget(self.splitter)
+        self.horizontalLayout_2.addWidget(self.splitter)
 
         FileManager.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(FileManager)
@@ -140,6 +129,7 @@ class Ui_FileManager(object):
         self.menuFichier.addAction(self.actionCopier)
         self.menuFichier.addAction(self.actionCouper)
         self.menuFichier.addAction(self.actionColler)
+        self.menuFichier.addAction(self.actionRenommer)
         self.menuFichier.addAction(self.actionSauvegarder)
 
         self.retranslateUi(FileManager)
@@ -154,6 +144,7 @@ class Ui_FileManager(object):
         self.actionCouper.setText(QCoreApplication.translate("FileManager", u"Couper", None))
         self.actionColler.setText(QCoreApplication.translate("FileManager", u"Coller", None))
         self.actionSauvegarder.setText(QCoreApplication.translate("FileManager", u"Sauvegarder", None))
+        self.actionRenommer.setText(QCoreApplication.translate("FileManager", u"Renommer", None))
         self.lbl_preview.setText(QCoreApplication.translate("FileManager", u"TextLabel", None))
         self.lbl_nom.setText(QCoreApplication.translate("FileManager", u"Nom", None))
         self.lbl_chemin.setText(QCoreApplication.translate("FileManager", u"Chemin", None))
